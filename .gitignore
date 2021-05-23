@@ -24,4 +24,4 @@ yarn-error.log*
 public
 # package.json
 # package-lock.json
-
+.env

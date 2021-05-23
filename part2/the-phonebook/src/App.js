@@ -8,6 +8,7 @@ import Persons from './components/Persons'
 const App = () => {
 
   const [persons, setPersons] = useState([])
+  const [filter, setFilter] = useState('')
 
   useEffect(() => {
     axios
@@ -15,9 +16,6 @@ const App = () => {
         setPersons(response.data)
       })
   }, [])
-
-  
-  const [filter, setFilter] = useState('')
   
   const handleFilterChange = (event) => {
     setFilter(event.target.value)
