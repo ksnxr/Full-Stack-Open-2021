@@ -1,13 +1,24 @@
 import React from 'react'
+import personService from '../services/persons'
 
 
-const Persons = ({ persons }) => {
+const Persons = ({ persons, setPersons }) => {
+  const handleDelete = person => {
+    if (window.confirm(`Delete ${person.name}?`)) {
+      personService
+        .remove(person.id)
+      setPersons(persons.filter(current => current.id !== person.id))
+    }
+  }
   return (
-    <ul>
+    <div>
       {persons.map(person =>
-        <li key={person.name}>{person.name} {person.number}</li>
+        <div key={person.id}>
+          {person.name} {person.number}
+          <button onClick={() => handleDelete(person)}>delete</button>
+        </div>
       )}
-    </ul>
+    </div>
   )
 }
 
