@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import '../styles.css'
 
 
 const Country = ({ country, api_key }) => {

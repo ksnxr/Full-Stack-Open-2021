@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import personService from '../services/persons'
 
 
-const PersonForm = ({ persons, setPersons }) => {
+const PersonForm = ({ persons, setPersons, setMessage, setColor }) => {
     const [newName, setNewName] = useState('')
     const [newNumber, setNewNumber] = useState('')
 
@@ -23,13 +23,22 @@ const PersonForm = ({ persons, setPersons }) => {
             if (window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)) {
                 personService
                     .update(id, changedPerson)
-                    .then(returnedPerson =>
-                        setPersons(persons.map(p => p.id !== returnedPerson.id ? p : returnedPerson)))
+                    .then(returnedPerson => {
+                        setPersons(persons.map(p => p.id !== returnedPerson.id ? p : returnedPerson))
+                        setMessage(`Updated ${newName}`)
+                        setColor('green')
+                        setTimeout(() => {
+                            setMessage(null)
+                        }, 3000)
+                    }
+                    )
                     .catch(error => {
-                        alert(
-                            `the person '${person.name}' was already deleted from server`
-                        )
                         setPersons(persons.filter(p => p.id !== id))
+                        setMessage(`Information of ${newName} has already been removed from server`)
+                        setColor('red')
+                        setTimeout(() => {
+                            setMessage(null)
+                        }, 3000)
                     })
             }
         } else {
@@ -44,6 +53,13 @@ const PersonForm = ({ persons, setPersons }) => {
                     returnedPerson =>
                         setPersons(persons.concat(returnedPerson))
                 )
+            setMessage(
+                `Added ${newName}`
+            )
+            setColor('green')
+            setTimeout(() => {
+                setMessage(null)
+            }, 3000)
         }
         setNewName('')
         setNewNumber('')
