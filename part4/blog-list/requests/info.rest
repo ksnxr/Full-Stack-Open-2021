@@ -1,0 +1,10 @@
+###
+POST http://127.0.0.1:3003/api/blogs
+Content-Type: application/json
+
+{
+    "title": "Harry Potter",
+    "author": "Rowling",
+    "url": "www.duckduckgo.com",
+    "likes": 10
+}
