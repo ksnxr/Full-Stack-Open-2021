@@ -31,12 +31,6 @@ const favoriteBlog = (blogs) => {
 }
 
 const mostBlogs = (blogs) => {
-    // authors = _.countBy(blogs, (blog) => blog.author)
-    // console.log(
-    //     Object.entries(authors).reduce((entry1, entry2) =>
-    //         entry1[1] > entry2[1] ? entry1 : entry2
-    //     )[0]
-    // )
     if (blogs.length === 0) {
         return {}
     } else if (blogs.length === 1) {
